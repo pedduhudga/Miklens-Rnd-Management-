@@ -6,6 +6,7 @@ import { z } from 'zod';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../config/firebase';
 import { useAuth } from '../contexts/AuthContext';
+import { Button } from '../components/ui/Button';
 
 const loginSchema = z.object({
   email: z.string().email('Invalid email address'),
@@ -82,24 +83,16 @@ export const Login: React.FC = () => {
       </div>
 
       <div>
-        <button
-          type="submit"
-          disabled={isSubmitting}
-          className="flex w-full justify-center rounded-md border border-transparent bg-blue-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50"
-        >
+        <Button type="submit" disabled={isSubmitting} fullWidth>
           {isSubmitting ? 'Signing in...' : 'Sign in'}
-        </button>
+        </Button>
       </div>
 
       {(!import.meta.env.VITE_FIREBASE_API_KEY || import.meta.env.VITE_FIREBASE_API_KEY === 'mock-api-key') && (
         <div className="mt-6 border-t border-gray-200 pt-6 dark:border-gray-800">
-          <button
-            type="button"
-            onClick={handleDemoLogin}
-            className="flex w-full justify-center rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:bg-gray-800 dark:text-gray-300 dark:border-gray-700 dark:hover:bg-gray-700"
-          >
+          <Button type="button" variant="outline" onClick={handleDemoLogin} fullWidth>
             Login as Demo User
-          </button>
+          </Button>
         </div>
       )}
     </form>

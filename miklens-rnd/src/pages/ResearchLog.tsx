@@ -5,6 +5,7 @@ import { z } from 'zod';
 import { Save, AlertCircle, CheckCircle2 } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import { createDailyLog } from '../services/researchLogs';
+import { Button } from '../components/ui/Button';
 
 const logSchema = z.object({
   productId: z.string().min(1, 'Product is required'),
@@ -178,21 +179,14 @@ export const ResearchLog: React.FC = () => {
           </div>
         </div>
 
-        <div className="pt-5 flex justify-end">
-          <button
-            type="button"
-            className="rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700"
-          >
+        <div className="pt-5 flex justify-end space-x-3">
+          <Button type="button" variant="outline">
             Cancel
-          </button>
-          <button
-            type="submit"
-            disabled={isSubmitting}
-            className="ml-3 inline-flex justify-center rounded-md border border-transparent bg-blue-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50"
-          >
+          </Button>
+          <Button type="submit" disabled={isSubmitting}>
             <Save className="mr-2 h-4 w-4" />
             {isSubmitting ? 'Saving...' : 'Save Log'}
-          </button>
+          </Button>
         </div>
       </form>
     </div>
