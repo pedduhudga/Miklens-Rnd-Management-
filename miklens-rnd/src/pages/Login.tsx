@@ -91,15 +91,17 @@ export const Login: React.FC = () => {
         </button>
       </div>
 
-      <div className="mt-6 border-t border-gray-200 pt-6 dark:border-gray-800">
-        <button
-          type="button"
-          onClick={handleDemoLogin}
-          className="flex w-full justify-center rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:bg-gray-800 dark:text-gray-300 dark:border-gray-700 dark:hover:bg-gray-700"
-        >
-          Login as Demo User
-        </button>
-      </div>
+      {(!import.meta.env.VITE_FIREBASE_API_KEY || import.meta.env.VITE_FIREBASE_API_KEY === 'mock-api-key') && (
+        <div className="mt-6 border-t border-gray-200 pt-6 dark:border-gray-800">
+          <button
+            type="button"
+            onClick={handleDemoLogin}
+            className="flex w-full justify-center rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:bg-gray-800 dark:text-gray-300 dark:border-gray-700 dark:hover:bg-gray-700"
+          >
+            Login as Demo User
+          </button>
+        </div>
+      )}
     </form>
   );
 };

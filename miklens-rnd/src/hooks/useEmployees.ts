@@ -1,20 +1,32 @@
-import { useQuery } from '@tanstack/react-query';
-import { getDocs } from 'firebase/firestore';
+import { useEffect, useState } from 'react';
+import { onSnapshot } from 'firebase/firestore';
 import { employeesCollection } from '../services/db';
+import type { Employee } from '../services/db';
 
 export const useEmployees = () => {
-  return useQuery({
-    queryKey: ['employees'],
-    queryFn: async () => {
-      const snapshot = await getDocs(employeesCollection);
+  const [data, setData] = useState<Employee[] | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    if (!import.meta.env.VITE_FIREBASE_API_KEY || import.meta.env.VITE_FIREBASE_API_KEY === 'mock-api-key') {
+      setIsLoading(false);
+      return;
+    }
+
+    const unsubscribe = onSnapshot(employeesCollection, (snapshot) => {
       if (snapshot.empty) {
-         // Return empty array if no data exists yet. The component will handle fallback.
-         return [];
+        setData([]);
+      } else {
+        setData(snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })));
       }
-      return snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-    },
-    // We disable this during development if no real config is present,
-    // but the hook architecture is correct.
-    enabled: import.meta.env.VITE_FIREBASE_API_KEY !== 'mock-api-key',
-  });
+      setIsLoading(false);
+    }, (error) => {
+      console.error("Error fetching employees realtime:", error);
+      setIsLoading(false);
+    });
+
+    return () => unsubscribe();
+  }, []);
+
+  return { data, isLoading };
 };

@@ -25,13 +25,15 @@ import { Notifications } from './pages/Notifications';
 import { FieldTrials } from './pages/FieldTrials';
 import { LaboratoryTests } from './pages/LaboratoryTests';
 import { Observations } from './pages/Observations';
+import { ErrorBoundary } from './components/ErrorBoundary';
 const queryClient = new QueryClient();
 
 function App() {
   return (
-    <QueryClientProvider client={queryClient}>
-      <AuthProvider>
-        <BrowserRouter>
+    <ErrorBoundary>
+      <QueryClientProvider client={queryClient}>
+        <AuthProvider>
+          <BrowserRouter>
           <Routes>
             {/* Public Routes */}
             <Route element={<AuthLayout />}>
@@ -64,12 +66,13 @@ function App() {
               </Route>
             </Route>
 
-            {/* Fallback */}
-            <Route path="*" element={<Navigate to="/" replace />} />
-          </Routes>
-        </BrowserRouter>
-      </AuthProvider>
-    </QueryClientProvider>
+              {/* Fallback */}
+              <Route path="*" element={<Navigate to="/" replace />} />
+            </Routes>
+          </BrowserRouter>
+        </AuthProvider>
+      </QueryClientProvider>
+    </ErrorBoundary>
   );
 }
 

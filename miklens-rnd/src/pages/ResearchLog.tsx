@@ -3,6 +3,8 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { Save, AlertCircle, CheckCircle2 } from 'lucide-react';
+import { useAuth } from '../contexts/AuthContext';
+import { createDailyLog } from '../services/researchLogs';
 
 const logSchema = z.object({
   productId: z.string().min(1, 'Product is required'),
@@ -20,6 +22,7 @@ type LogFormValues = z.infer<typeof logSchema>;
 
 export const ResearchLog: React.FC = () => {
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const { currentUser } = useAuth();
 
   const { register, handleSubmit, formState: { errors, isSubmitting }, reset } = useForm<LogFormValues>({
     resolver: zodResolver(logSchema),
@@ -32,14 +35,33 @@ export const ResearchLog: React.FC = () => {
 
   const onSubmit = async (data: LogFormValues) => {
     try {
-      console.log('Submitting log to Firebase:', data);
-      // Simulate network request
-      await new Promise(resolve => setTimeout(resolve, 800));
+      if (!import.meta.env.VITE_FIREBASE_API_KEY || import.meta.env.VITE_FIREBASE_API_KEY === 'mock-api-key') {
+        // Fallback for demo without real config
+        console.log('Demo mode: Simulated saving log:', data);
+        await new Promise(resolve => setTimeout(resolve, 800));
+      } else {
+        // Real persistence to Firestore
+        await createDailyLog(currentUser?.uid || 'unknown-user', {
+          productId: data.productId,
+          experimentId: data.experimentId,
+          todaysObjective: data.objective,
+          activitiesPerformed: data.activities,
+          observations: '', // Would come from future fields
+          problems: data.problems || '',
+          achievements: data.achievements || '',
+          nextSteps: '',
+          timeSpentMinutes: data.timeSpent,
+          completionStatus: data.completionStatus,
+          estimatedProductStage: 'Lab Testing', // Default for now
+          confidenceLevel: data.confidenceLevel
+        });
+      }
+
       setSubmitStatus('success');
       reset();
-
       setTimeout(() => setSubmitStatus('idle'), 3000);
     } catch (err) {
+      console.error("Failed to save log:", err);
       setSubmitStatus('error');
     }
   };
