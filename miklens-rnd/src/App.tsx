@@ -14,6 +14,10 @@ import { Analytics } from './pages/Analytics';
 import { ResearchLog } from './pages/ResearchLog';
 import { EmployeeProfile } from './pages/EmployeeProfile';
 import { Settings } from './pages/Settings';
+import { Projects } from './pages/Projects';
+import { Tasks } from './pages/Tasks';
+import { Documents } from './pages/Documents';
+import { Calendar } from './pages/Calendar';
 
 const queryClient = new QueryClient();
 
@@ -39,6 +43,10 @@ function App() {
                 <Route path="/analytics" element={<Analytics />} />
                 <Route path="/research-log" element={<ResearchLog />} />
                 <Route path="/profile" element={<EmployeeProfile />} />
+                <Route path="/projects" element={<Projects />} />
+                <Route path="/tasks" element={<Tasks />} />
+                <Route path="/documents" element={<Documents />} />
+                <Route path="/calendar" element={<Calendar />} />
                 <Route path="/settings" element={<Settings />} />
               </Route>
             </Route>
