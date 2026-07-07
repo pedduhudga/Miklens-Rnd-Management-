@@ -20,7 +20,7 @@ export const Header: React.FC = () => {
         {/* Mobile menu button could go here */}
       </div>
       <div className="flex items-center space-x-4">
-        <div className="flex items-center space-x-2 text-sm">
+        <a href="/profile" className="flex items-center space-x-2 text-sm hover:opacity-80">
           <div className="flex h-8 w-8 items-center justify-center rounded-full bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-200">
             <UserIcon className="h-5 w-5" />
           </div>
@@ -32,7 +32,7 @@ export const Header: React.FC = () => {
               {userRole}
             </span>
           </div>
-        </div>
+        </a>
         <button
           onClick={handleLogout}
           className="rounded-full p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 dark:hover:bg-gray-800 dark:hover:text-gray-300"

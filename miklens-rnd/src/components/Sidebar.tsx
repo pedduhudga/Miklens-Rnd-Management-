@@ -1,9 +1,10 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { LayoutDashboard, Users, FlaskConical, Beaker, FileText, BarChart3, Settings } from 'lucide-react';
+import { LayoutDashboard, Users, FlaskConical, Beaker, FileText, BarChart3, Edit3, Settings } from 'lucide-react';
 
 const navItems = [
   { name: 'Dashboard', href: '/', icon: LayoutDashboard },
+  { name: 'Daily Log', href: '/research-log', icon: Edit3 },
   { name: 'Products', href: '/products', icon: FlaskConical },
   { name: 'Experiments', href: '/experiments', icon: Beaker },
   { name: 'Employees', href: '/employees', icon: Users },

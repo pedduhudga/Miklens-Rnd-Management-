@@ -11,6 +11,9 @@ import { Products } from './pages/Products';
 import { Experiments } from './pages/Experiments';
 import { Reports } from './pages/Reports';
 import { Analytics } from './pages/Analytics';
+import { ResearchLog } from './pages/ResearchLog';
+import { EmployeeProfile } from './pages/EmployeeProfile';
+import { Settings } from './pages/Settings';
 
 const queryClient = new QueryClient();
 
@@ -34,7 +37,9 @@ function App() {
                 <Route path="/experiments" element={<Experiments />} />
                 <Route path="/reports" element={<Reports />} />
                 <Route path="/analytics" element={<Analytics />} />
-                <Route path="/settings" element={<div className="p-4 text-white">Settings</div>} />
+                <Route path="/research-log" element={<ResearchLog />} />
+                <Route path="/profile" element={<EmployeeProfile />} />
+                <Route path="/settings" element={<Settings />} />
               </Route>
             </Route>
 
