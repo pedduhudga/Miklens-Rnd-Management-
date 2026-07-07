@@ -22,7 +22,9 @@ import { Approvals } from './pages/Approvals';
 import { AIInsights } from './pages/AIInsights';
 import { AuditLogs } from './pages/AuditLogs';
 import { Notifications } from './pages/Notifications';
-
+import { FieldTrials } from './pages/FieldTrials';
+import { LaboratoryTests } from './pages/LaboratoryTests';
+import { Observations } from './pages/Observations';
 const queryClient = new QueryClient();
 
 function App() {
@@ -55,6 +57,9 @@ function App() {
                 <Route path="/ai-insights" element={<AIInsights />} />
                 <Route path="/audit-logs" element={<AuditLogs />} />
                 <Route path="/notifications" element={<Notifications />} />
+                <Route path="/field-trials" element={<FieldTrials />} />
+                <Route path="/lab-tests" element={<LaboratoryTests />} />
+                <Route path="/observations" element={<Observations />} />
                 <Route path="/settings" element={<Settings />} />
               </Route>
             </Route>

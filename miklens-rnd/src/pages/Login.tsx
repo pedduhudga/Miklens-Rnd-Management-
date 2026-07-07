@@ -5,6 +5,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../config/firebase';
+import { useAuth } from '../contexts/AuthContext';
 
 const loginSchema = z.object({
   email: z.string().email('Invalid email address'),
@@ -21,6 +22,8 @@ export const Login: React.FC = () => {
     resolver: zodResolver(loginSchema),
   });
 
+  const { loginAsDemo } = useAuth() as any;
+
   const onSubmit = async (data: LoginFormValues) => {
     try {
       setError(null);
@@ -31,6 +34,11 @@ export const Login: React.FC = () => {
       console.error(err);
       setError('Invalid email or password.');
     }
+  };
+
+  const handleDemoLogin = () => {
+     loginAsDemo();
+     navigate('/');
   };
 
   return (
@@ -80,6 +88,16 @@ export const Login: React.FC = () => {
           className="flex w-full justify-center rounded-md border border-transparent bg-blue-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50"
         >
           {isSubmitting ? 'Signing in...' : 'Sign in'}
+        </button>
+      </div>
+
+      <div className="mt-6 border-t border-gray-200 pt-6 dark:border-gray-800">
+        <button
+          type="button"
+          onClick={handleDemoLogin}
+          className="flex w-full justify-center rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:bg-gray-800 dark:text-gray-300 dark:border-gray-700 dark:hover:bg-gray-700"
+        >
+          Login as Demo User
         </button>
       </div>
     </form>

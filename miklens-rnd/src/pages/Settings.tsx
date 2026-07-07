@@ -1,9 +1,11 @@
 import React from 'react';
 import { useAuth } from '../contexts/AuthContext';
+import { useTheme } from '../contexts/ThemeContext';
 import { User, Bell, Shield, Database } from 'lucide-react';
 
 export const Settings: React.FC = () => {
   const { userRole } = useAuth();
+  const { theme, toggleTheme } = useTheme();
 
   return (
     <div className="mx-auto max-w-4xl space-y-6">
@@ -74,8 +76,8 @@ export const Settings: React.FC = () => {
                 <p>Toggle system theme. (This will be linked to a global theme context later).</p>
               </div>
               <div className="mt-5">
-                 <button onClick={() => document.documentElement.classList.toggle('dark')} className="inline-flex justify-center rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 dark:bg-gray-800 dark:text-white dark:border-gray-700 dark:hover:bg-gray-700">
-                    Toggle Dark/Light Mode
+                 <button onClick={toggleTheme} className="inline-flex justify-center items-center rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 dark:bg-gray-800 dark:text-white dark:border-gray-700 dark:hover:bg-gray-700">
+                    Current Theme: {theme === 'dark' ? 'Dark' : 'Light'} (Click to Toggle)
                  </button>
               </div>
             </div>

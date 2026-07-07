@@ -24,16 +24,17 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
-      setCurrentUser(user);
+      // Check if we manually set a mock user during a demo login
       if (user) {
-        try {
-          // In a real scenario, this would fetch from 'users' collection using db
-          setUserRole('Admin');
-        } catch (error) {
-          console.error("Error fetching user role", error);
-        }
+         setCurrentUser(user);
+         setUserRole('Admin');
+      } else if (!user && sessionStorage.getItem('demo_mode') === 'true') {
+         // Re-hydrate mock demo user
+         setCurrentUser({ email: 'demo@miklensbio.com', uid: 'demo-123' } as User);
+         setUserRole('Admin');
       } else {
-        setUserRole(null);
+         setCurrentUser(null);
+         setUserRole(null);
       }
       setLoading(false);
     });
@@ -41,8 +42,15 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     return unsubscribe;
   }, []);
 
+  // Expose a method to manually force demo mode
+  const loginAsDemo = () => {
+    sessionStorage.setItem('demo_mode', 'true');
+    setCurrentUser({ email: 'demo@miklensbio.com', uid: 'demo-123' } as User);
+    setUserRole('Admin');
+  };
+
   return (
-    <AuthContext.Provider value={{ currentUser, userRole, loading }}>
+    <AuthContext.Provider value={{ currentUser, userRole, loading, loginAsDemo } as any}>
       {!loading && children}
     </AuthContext.Provider>
   );

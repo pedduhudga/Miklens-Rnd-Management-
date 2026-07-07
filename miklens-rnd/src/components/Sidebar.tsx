@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { LayoutDashboard, Users, FlaskConical, Beaker, FileText, BarChart3, Edit3, Settings, FolderGit2, CheckSquare, FileStack, CalendarDays, CheckCircle, Sparkles, Database, Bell } from 'lucide-react';
+import { LayoutDashboard, Users, FlaskConical, Beaker, FileText, BarChart3, Edit3, Settings, FolderGit2, CheckSquare, FileStack, CalendarDays, CheckCircle, Sparkles, Database, Bell, TestTube2, MapPin, Eye } from 'lucide-react';
 
 const navItems = [
   { name: 'Dashboard', href: '/', icon: LayoutDashboard },
@@ -9,6 +9,9 @@ const navItems = [
   { name: 'Products', href: '/products', icon: FlaskConical },
   { name: 'Projects', href: '/projects', icon: FolderGit2 },
   { name: 'Experiments', href: '/experiments', icon: Beaker },
+  { name: 'Field Trials', href: '/field-trials', icon: MapPin },
+  { name: 'Lab Tests', href: '/lab-tests', icon: TestTube2 },
+  { name: 'Observations', href: '/observations', icon: Eye },
   { name: 'Tasks', href: '/tasks', icon: CheckSquare },
   { name: 'Approvals', href: '/approvals', icon: CheckCircle },
   { name: 'Employees', href: '/employees', icon: Users },
