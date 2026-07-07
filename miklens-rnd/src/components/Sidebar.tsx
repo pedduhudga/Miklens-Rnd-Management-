@@ -1,19 +1,23 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { LayoutDashboard, Users, FlaskConical, Beaker, FileText, BarChart3, Edit3, Settings, FolderGit2, CheckSquare, FileStack, CalendarDays } from 'lucide-react';
+import { LayoutDashboard, Users, FlaskConical, Beaker, FileText, BarChart3, Edit3, Settings, FolderGit2, CheckSquare, FileStack, CalendarDays, CheckCircle, Sparkles, Database, Bell } from 'lucide-react';
 
 const navItems = [
   { name: 'Dashboard', href: '/', icon: LayoutDashboard },
   { name: 'Daily Log', href: '/research-log', icon: Edit3 },
+  { name: 'AI Insights', href: '/ai-insights', icon: Sparkles },
   { name: 'Products', href: '/products', icon: FlaskConical },
   { name: 'Projects', href: '/projects', icon: FolderGit2 },
   { name: 'Experiments', href: '/experiments', icon: Beaker },
   { name: 'Tasks', href: '/tasks', icon: CheckSquare },
+  { name: 'Approvals', href: '/approvals', icon: CheckCircle },
   { name: 'Employees', href: '/employees', icon: Users },
   { name: 'Documents', href: '/documents', icon: FileStack },
   { name: 'Calendar', href: '/calendar', icon: CalendarDays },
   { name: 'Analytics', href: '/analytics', icon: BarChart3 },
   { name: 'Reports', href: '/reports', icon: FileText },
+  { name: 'Notifications', href: '/notifications', icon: Bell },
+  { name: 'Audit Logs', href: '/audit-logs', icon: Database },
   { name: 'Settings', href: '/settings', icon: Settings },
 ];
 

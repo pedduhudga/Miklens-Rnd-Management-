@@ -18,6 +18,10 @@ import { Projects } from './pages/Projects';
 import { Tasks } from './pages/Tasks';
 import { Documents } from './pages/Documents';
 import { Calendar } from './pages/Calendar';
+import { Approvals } from './pages/Approvals';
+import { AIInsights } from './pages/AIInsights';
+import { AuditLogs } from './pages/AuditLogs';
+import { Notifications } from './pages/Notifications';
 
 const queryClient = new QueryClient();
 
@@ -47,6 +51,10 @@ function App() {
                 <Route path="/tasks" element={<Tasks />} />
                 <Route path="/documents" element={<Documents />} />
                 <Route path="/calendar" element={<Calendar />} />
+                <Route path="/approvals" element={<Approvals />} />
+                <Route path="/ai-insights" element={<AIInsights />} />
+                <Route path="/audit-logs" element={<AuditLogs />} />
+                <Route path="/notifications" element={<Notifications />} />
                 <Route path="/settings" element={<Settings />} />
               </Route>
             </Route>
